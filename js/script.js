@@ -1,16 +1,17 @@
 const calculate = document.getElementById("calculate");
+const reset = document.getElementById("reset");
 const result = document.getElementById("result");
-const weigthInput = document.getElementById("weight");
+const weightInput = document.getElementById("weight");
 const heightInput = document.getElementById("height");
 const score = document.getElementById("score");
 const category = document.getElementById("category");
 const explanation = document.getElementById("explanation");
 
 const categoryBmi = (bmi) => {
-  if (bmi < 18.5) return "Kekurangan Berat Badan";
-  if (bmi >= 18.5 && bmi < 24.9) return "Normal (Ideal)";
-  if (bmi >= 25 && bmi <= 29.9) return "Kelebihan Berat Badan";
-  return "Obesitas";
+  if (bmi < 18.5) return "Kekurangan Berat Badan ⚠️";
+  if (bmi >= 18.5 && bmi < 24.9) return "Normal (Ideal) ✅";
+  if (bmi >= 25 && bmi <= 29.9) return "Kelebihan Berat Badan ⚠️";
+  return "Obesitas 🚨";
 };
 
 const explanationBmi = (bmi) => {
@@ -21,10 +22,11 @@ const explanationBmi = (bmi) => {
 };
 
 const calculateBmi = () => {
-  if (weigthInput.value == "" || heightInput.value == "")
-    return alert("input can't empty");
+  if (weightInput.value == "" || heightInput.value == "" || parseFloat(weightInput.value) <= 0 || parseFloat(heightInput.value) <= 50) {
+      return alert("input can't empty and must be greater than 0 (for weight) and greater than 50 (for height)");
+  }
 
-  const weight = parseFloat(weigthInput.value);
+  const weight = parseFloat(weightInput.value);
   const height = parseFloat(heightInput.value) / 100;
 
   const bmi = weight / (height * height);
@@ -34,6 +36,27 @@ const calculateBmi = () => {
   explanation.innerText = explanationBmi(bmi);
 
   result.style.display = "flex";
+  result.classList.add("fade-in");
+  reset.style.display = "block";
+};
+
+const resetBmi = () => {
+  weightInput.value = "";
+  heightInput.value = "";
+  result.style.display = "none";
+  result.classList.remove("fade-in");
+  score.innerText = "";
+  category.innerText = "";
+  explanation.innerText = "";
+  reset.style.display = "none";
 };
 
 calculate.addEventListener("click", () => calculateBmi());
+reset.addEventListener("click", () => resetBmi());
+[weightInput, heightInput].forEach(input => {
+  input.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      calculateBmi();
+    }
+  });
+});

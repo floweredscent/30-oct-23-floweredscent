@@ -2,47 +2,47 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>BMI Calculator</title>
     <link rel="stylesheet" href="css/style.css"/>
   </head>
   <body>
-    
-    <div class="card">
-      <h1>BMI Calculator</h1>
-      <p id="introduction">
-        Berat badan ideal adalah impian semua orang. 
-        Tidak hanya memiliki bentuk tubuh yang menunjang penampilan, 
-        berat badan ideal juga menandakan kondisi tubuh yang sehat.
-        Kalkulator ini akan membantu kamu mengetahui apakah berat badanmu dalam kategori ideal
-        atau tidak. 
-        <br>Yuk, hitung sekarang di BMI Calculator.
-      </p>
+    <section class="bmi-container">
+      <div class="card">
+        <h1>BMI Calculator</h1>
+        <p id="introduction">
+          Berat badan ideal adalah impian semua orang. 
+          Tidak hanya memiliki bentuk tubuh yang menunjang penampilan, 
+          berat badan ideal juga menandakan kondisi tubuh yang sehat.
+          Kalkulator ini akan membantu kamu mengetahui apakah berat badanmu dalam kategori ideal
+          atau tidak. Yuk, hitung sekarang di BMI Calculator.
+        </p>
       <div class="input-container">
         <div class="input-group">
           <label for="gender-input">Jenis Kelamin</label>
-            <select>
+            <select id="gender-input">
                 <option>Laki-laki</option>
                 <option>Perempuan</option>
             </select>
         </div>
         <div class="input-group">
           <label for="weight">Weight (Kg)</label>
-          <input type="number" id="weight" />
+          <input type="number" id="weight" aria-label="Masukkan berat badan dalam kg" min="1" />
         </div>
         <div class="input-group">
           <label for="height">Height (Cm)</label>
-          <input type="number" id="height" />
+          <input type="number" id="height" aria-label="Masukkan tinggi badan dalam cm" min="50" />
         </div>
       </div>
       <button id="calculate">Hitung BMI</button>
-      <div id="result">
+      <div id="result" class="fade-in">
         <span>Hasil BMI:</span>
         <span id="score"></span>
         <span id="category"></span>
         <span id="explanation"></span>
+        <button id="reset" style="display: none;">Reset</button>
       </div>
-    </div>
+    </section>
     <script src="js/script.js"></script>
   </body>
 </html>
